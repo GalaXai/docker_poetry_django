@@ -6,7 +6,7 @@ services:
         context: ../..
         dockerfile: ci/dockerfiles/backend-dev.Dockerfile
     deploy:
-      replicas: 8
+      replicas: 1
       resources:
         limits:
           cpus: "0.5"
@@ -14,11 +14,11 @@ services:
       restart_policy:
         condition: on-failure
 
-  db:
-    image: postgres:15
+  #db:
+  #  image: postgres:15
 
-#    ports:
-#      - "5432:5432"
+    ports:
+      - 8000:8000
 
   cache:
     image: redis:6.2

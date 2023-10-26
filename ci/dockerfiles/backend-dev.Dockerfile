@@ -25,7 +25,7 @@ COPY ./ci/requirements/backend-dev-requirements.txt ./requirements.txt
 # RUN pip install -r requirements.txt
 
 ARG PIP_CACHE_DIR=/var/cache/pip
-RUN --mount=type=cache,target=$PIP_CASCHE_DIR \
+RUN --mount=type=cache,target=$PIP_CACHE_DIR \
     pip install -r requirements.txt && rm requirements.txt
 #CMD
 CMD ["python","manage.py", "runserver","0.0.0.0:8000"]
