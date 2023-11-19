@@ -1,0 +1,58 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-toml
+      - id: debug-statements
+      - id: sort-simple-yaml
+      - id: mixed-line-ending
+      - id: detect-private-key
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.0.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: []
+  - repo: https://github.com/python-poetry/poetry
+    rev: 1.7.0
+    hooks:
+      - id: poetry-check
+        name: poetry-check
+        description: run poetry check to validate config
+        entry: poetry check
+        language: python
+        pass_filenames: false
+        files: ^(.*/)?pyproject\.toml$
+
+      - id: poetry-lock
+        name: poetry-lock
+        description: run poetry lock to update lock file
+        entry: poetry lock
+        language: python
+        pass_filenames: false
+        files: ^(.*/)?(poetry\.lock|pyproject\.toml)$
+
+      - id: poetry-export
+        name: poetry-export
+        description: run poetry export to sync lock file with requirements.txt
+        entry: poetry export
+        language: python
+        pass_filenames: false
+        files: ^(.*/)?poetry\.lock$
+        args: [ "-f", "requirements.txt", "-o", "ci/requirements/requirements.txt" ]
+
+      - id: poetry-install
+        name: poetry-install
+        description: run poetry install to install dependencies from the lock file
+        entry: poetry install
+        language: python
+        pass_filenames: false
+        stages: [ post-checkout, post-merge ]
+        always_run: true
