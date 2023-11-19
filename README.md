@@ -9,10 +9,9 @@ sudo poetry export -o ./ci/requirements/kernel-dev-requirements.txt
 ```
 ```Bash
 # Build the image
-sudo docker build -f ./ci//dockerfiles/kernel-dev.Dockerfile . 
+sudo docker build -f ./ci//dockerfiles/kernel-dev.Dockerfile .
 ```
 ```Bash
 # Run the image
 sudo docker compose --file ./ci/compose/kernel.yaml up --build
 ```
-
