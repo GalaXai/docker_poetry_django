@@ -11,6 +11,8 @@ django = "^4.2.6"
 django-import-export = "^3.3.1"
 scrapy = "^2.11.0"
 pre-commit = "^3.5.0"
+psycopg = "^3.1.13"
+poetry-plugin-export = "^1.6.0"
 
 
 [build-system]
